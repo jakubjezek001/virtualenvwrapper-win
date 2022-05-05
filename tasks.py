@@ -101,11 +101,11 @@ def build(ctx, clean=False, wheel=True, sign=True, upload=False):
     targets = 'sdist'
     if wheel:
         targets += ' bdist_wheel'
-    ctx.run("python setup.py " + targets)
+    ctx.run(f"python setup.py {targets}")
 
     if wheel and sign:
         for fname in glob.glob('dist/*.whl'):
-            ctx.run('wheel sign ' + fname)
+            ctx.run(f'wheel sign {fname}')
 
     # ctx.run("python setup.py build_sphinx")
     if upload:

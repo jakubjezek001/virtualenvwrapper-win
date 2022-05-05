@@ -7,12 +7,7 @@ CURRENT_TEST = os.environ['config.current_test']
 
 
 def log(cmd, args=''):
-    os.system('_log %s %s:%s %s' % (
-        cmd,
-        CURRENT_MODULE,
-        CURRENT_TEST,
-        args
-    ))
+    os.system(f'_log {cmd} {CURRENT_MODULE}:{CURRENT_TEST} {args}')
     return 0 if cmd == 'OK' else 1
 
 
@@ -21,16 +16,17 @@ def assert_contains(fname, text, NOT=''):
     """
     with open(fname, 'rb') as fp:
         contents = fp.read()
-        if NOT == 'NOT':
-            if text not in contents:
-                return log('OK', "didn't find [%s]" % text)
-            else:
-                return log('FAIL', 'found ' + text + ' in ' + contents)
+        if NOT != 'NOT':
+            return (
+                log('OK', f'found [{text}]')
+                if text in contents
+                else log('FAIL', f'[{text}] not in {contents}')
+            )
+
+        if text not in contents:
+            return log('OK', "didn't find [%s]" % text)
         else:
-            if text in contents:
-                return log('OK', 'found [%s]' % text)
-            else:
-                return log('FAIL', '[%s] not in %s' % (text, contents))
+            return log('FAIL', f'found {text} in {contents}')
 
 
 if __name__ == "__main__":
