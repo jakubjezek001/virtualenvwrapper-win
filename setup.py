@@ -9,7 +9,7 @@ EMAIL = 'davidmarble@gmail.com'
 DESCRIPTION = ('Port of Doug Hellmann\'s virtualenvwrapper '
                'to Windows batch scripts')
 VERSION = '1.2.5'
-PROJECT_URL = 'https://github.com/davidmarble/%s/' % (PROJECT)
+PROJECT_URL = f'https://github.com/davidmarble/{PROJECT}/'
 scripts_loc = 'scripts/'
 scripts = [
     'add2virtualenv.bat',
